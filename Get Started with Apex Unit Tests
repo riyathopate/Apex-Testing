@@ -1,0 +1,63 @@
+@IsTest
+public class VerifyDateTest {
+
+    // Test case: Date2 is within 30 days of Date1
+    @IsTest
+    static void testDateWithin30Days() {
+        Date date1 = Date.newInstance(2025, 1, 1);
+        Date date2 = Date.newInstance(2025, 1, 15);
+
+        Date result = VerifyDate.CheckDates(date1, date2);
+
+        System.assertEquals(date2, result, 'Date2 is within 30 days, so it should be returned.');
+    }
+
+    // Test case: Date2 is in the past relative to Date1
+    @IsTest
+    static void testDateInThePast() {
+        Date date1 = Date.newInstance(2025, 1, 15);
+        Date date2 = Date.newInstance(2025, 1, 10);
+
+        Date result = VerifyDate.CheckDates(date1, date2);
+
+        Date expected = Date.newInstance(2025, 1, 31);
+        System.assertEquals(expected, result, 'Date2 is in the past, so end of the month should be returned.');
+    }
+
+    // Test case: Date2 is beyond 30 days of Date1
+    @IsTest
+    static void testDateBeyond30Days() {
+        Date date1 = Date.newInstance(2025, 1, 1);
+        Date date2 = Date.newInstance(2025, 2, 15);
+
+        Date result = VerifyDate.CheckDates(date1, date2);
+
+        Date expected = Date.newInstance(2025, 1, 31);
+        System.assertEquals(expected, result, 'Date2 is beyond 30 days, so end of the month should be returned.');
+    }
+
+    // Test case: Date2 is exactly 30 days from Date1
+    @IsTest
+    static void testDateExactly30Days() {
+        Date date1 = Date.newInstance(2025, 1, 1);
+        Date date2 = Date.newInstance(2025, 1, 31);
+
+        Date result = VerifyDate.CheckDates(date1, date2);
+
+        Date expected = Date.newInstance(2025, 1, 31);
+        System.assertEquals(expected, result, 'Date2 is exactly 30 days, so end of the month should be returned.');
+    }
+
+    // Test case: Date2 is null
+    @IsTest
+    static void testNullDate2() {
+        Date date1 = Date.newInstance(2025, 1, 1);
+
+        try {
+            Date result = VerifyDate.CheckDates(date1, null);
+            System.assert(false, 'Null Date2 should throw an exception.');
+        } catch (NullPointerException e) {
+            System.assert(true, 'Null Date2 throws a NullPointerException as expected.');
+        }
+    }
+}
