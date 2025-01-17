@@ -1,4 +1,4 @@
-@isTest
+//@isTest
 public class RandomContactFactory {
     public static List<Contact> generateRandomContacts(Integer numContactsToGenerate, String FName) {
         List<Contact> contactList = new List<Contact>();
