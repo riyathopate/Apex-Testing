@@ -1,5 +1,5 @@
 @IsTest
-public class VerifyDateTest {
+public class TestVerifyDate {
 
     // Test case: Date2 is within 30 days of Date1
     @IsTest
